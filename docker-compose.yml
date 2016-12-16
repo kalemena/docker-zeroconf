@@ -1,0 +1,19 @@
+version: '2'
+services:
+
+  browser:
+    image: kalemena/zeroconf
+    build: .
+    networks: 
+     - test
+    command: python -u browser.py
+    
+  registrator:
+    image: kalemena/zeroconf
+    build: .
+    networks:
+     - test
+    command: python -u registration-loop.py
+    
+networks:
+  test:
