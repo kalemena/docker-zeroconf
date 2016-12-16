@@ -7,6 +7,7 @@ Two containers are created with one listening and the other looping on register/
 
 The python samples running in images are copied from [python zeroconf github pages](https://github.com/paulsm/pyzeroconf).
 
+This repository matches the kalemena/zeroconf docker hub image.
 
 # How-To
 
