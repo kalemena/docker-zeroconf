@@ -3,9 +3,9 @@
 
 This images demonstrate minimal ZeroConf using python-zeroconf library.
 
-Two containers are created which with one listening and the other looping on register/unregister.
+Two containers are created with one listening and the other looping on register/unregister.
 
-The samples in image are taken from pointed references of zeroconf github pages.
+The python samples running in images are copied from [python zeroconf github pages](https://github.com/paulsm/pyzeroconf).
 
 
 # How-To
