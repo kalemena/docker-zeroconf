@@ -11,28 +11,38 @@ from zeroconf import ServiceInfo, Zeroconf
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
+    print('Number of arguments:', len(sys.argv), 'arguments.')
+    print('Argument List:', str(sys.argv))
     if len(sys.argv) > 1:
         assert sys.argv[1:] == ['--debug']
         logging.getLogger('zeroconf').setLevel(logging.DEBUG)
 
-    desc = {'path': '/~paulsm/'}
-
+    hostname = socket.gethostname()
+    
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('google.com', 0))
+    hostip = s.getsockname()[0]
+    
+    print("hostname = " + hostname)
+    print("ip = " + hostip)
+    
+    desc = {'name': hostname}
     info = ServiceInfo("_http._tcp.local.",
-                       "Paul's Test Web Site._http._tcp.local.",
-                       socket.inet_aton("127.0.0.1"), 80, 0, 0,
-                       desc, "ash-2.local.")
+                       hostname + " Test Web Site._http._tcp.local.",
+                       socket.inet_aton(hostip), 80, 0, 0,
+                       desc, hostname + ".local.")
 
     zeroconf = Zeroconf()
     print("Registration of a service, press Ctrl-C to exit...")
     
     try:
         while True:
-	    print("Registering...")
+	    print("Registering " + hostname + "...")
 	    zeroconf.register_service(info)
-            sleep(5)
-            print("Unregistering...")
+            sleep(20)
+            print("Unregistering " + hostname + "...")
             zeroconf.unregister_service(info)
-            sleep(5)
+            sleep(20)
     except KeyboardInterrupt:
         pass
     finally:        
