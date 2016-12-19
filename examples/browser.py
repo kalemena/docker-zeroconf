@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-from __future__ import absolute_import, division, print_function, unicode_literals
-
-""" Example of browsing for a service (in this case, HTTP) """
 
 import logging
 import socket
@@ -18,7 +15,7 @@ def on_service_state_change(zeroconf, service_type, name, state_change):
         if info:
             print("  Address: %s:%d" % (socket.inet_ntoa(info.address), info.port))
             print("  Weight: %d, priority: %d" % (info.weight, info.priority))
-            print("  Server: %s" % (info.server,))
+            print("  Server: %s" % (info.server))
             if info.properties:
                 print("  Properties are:")
                 for key, value in info.properties.items():
@@ -37,7 +34,7 @@ if __name__ == '__main__':
 
     zeroconf = Zeroconf()
     print("\nBrowsing services, press Ctrl-C to exit...\n")
-    browser = ServiceBrowser(zeroconf, "_http._tcp.local.", handlers=[on_service_state_change])
+    browser = ServiceBrowser(zeroconf, "_dynamix._tcp.local.", handlers=[on_service_state_change])
 
     try:
         while True:

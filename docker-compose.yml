@@ -7,6 +7,15 @@ services:
     networks: 
      - test
     command: python -u browser.py
+  
+  browser-web:
+    image: kalemena/zeroconf
+    build: .
+    networks: 
+     - test
+    ports:
+     - "127.0.0.1:7679:7679"
+    command: python -u browser-web.py
     
   registrator:
     image: kalemena/zeroconf

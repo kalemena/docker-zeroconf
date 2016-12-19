@@ -27,8 +27,8 @@ if __name__ == '__main__':
     print("ip = " + hostip)
     
     desc = {'name': hostname}
-    info = ServiceInfo("_http._tcp.local.",
-                       hostname + " Test Web Site._http._tcp.local.",
+    info = ServiceInfo("_dynamix._tcp.local.",
+                       hostname + " Test Web Site._dynamix._tcp.local.",
                        socket.inet_aton(hostip), 80, 0, 0,
                        desc, hostname + ".local.")
 
