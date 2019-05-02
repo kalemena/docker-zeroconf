@@ -1,34 +1,28 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 env:
   global:
-    - REGISTRY_USER=kalemena
-    - secure: "y90E8XDiW5xlCXuuq5ATwosJ2pX1t0mI9nMIkg4vJoowQbroE7fUrvlAgqNd3IW5xBRwexfAgUPgSF61L5mwhnAyoZpkMVI1KPu2MqmWnDuVjQcfS6l0NCcpkQkSfqeRm3gjLFmJ37CApqCNFLthDBhz3H9Zf6TNzAeYK64JQPqJyxtIu/MoCePKhc9S6IJ1LWHqIMczFF+BZmiMn72KNaKk4Hv4vRlLgk2dN0ePsLGIlLVSqvcW4Yesb+SBZDeUmeTWJW8rUuTPG2R/jvhjyHkiNBYQ1mPm/HAfh7xzF18bcDf5yHTjgnThLeFQnI+tgXi1uMQeUD8Fi+Hwsyxy79sH//3yxf7i56HLeU+RqHulOjyOpsUdwr86QG8Um6oOft1U2d+WIM6dzjaeVoO5/wRsqpTO77cepg7nZckXoBlPPNuiUFfZgJLXJGbO6fRFk4y8MiGtZtCsvuc1QftqE/yXC1qUQSG3vfzNuobSL2s02UwSmuUmH3jVfFHZ8s/KEahRz6Wac4KKz5HWrsYxhzg6+tl9Xp5ZFIV93LfRrC2qhMrNLxOsAvhbPqzcatWUKB3x97tTMHMnzRvU1p6/flKe1gzyYRPuMJ4HdxQPgFj7bpGN3PC27WbgMRIVr1XWsTgRHTFY8rCL9C7RwGYF2mWzS0o09Vte3Ho7XC4oGGM="
+  - REGISTRY_USER=kalemena
+  - secure: oSQMcCCQydlYz+hIW271NI3BQ2vhMoL130980ZSEwox391PnnJrh673cNPm5GOU+61tCqDDq4TC1veR2FxROOBxbAwXa9RSJmHdY+KoF+duDTIFD4BEdQpOhMjL++kmChzBv2hMVYc33ZNk4s0gvyUpj5/4o3DKv0rKBSUBKePbJneLM698PzKuXKXsAKRnBea59VZhcvYYIDoDSIIn5T7MhvS2WhyEIq6ctw+zHoDWm+yHwzFElXLtTaxH3Ru8Ms5dJAZPxVQ/lt7Tp9Jo0aT12My9NYi8xqQHUFWpYIEQDeKQsdTvJTGuyiaJz7ENurTVy3wdGMuFDReypWHiSTaJGaQjJxoKVY3aQDQmxGoNYnOoNuqpbwu3iCVhoYfCJlUe2JBIXIEKMMGS2+l5Q4sIVS5D5J3LBEWY7Ktkh8sUxkGtCEwjrz9M/09NRX+JJ6R8Du01opigcWGqYzbLeJcytvBOobBUISJ2Tm80QVhphD+ag/AMq+xpWkQJ4F30HglFghN6b3rZDGlwmp/Pkv7P/QrjkhBXICRPIRUEGHJ9XF6OzgSVC80DG5nJh9rWrdOGAqqKJtFxUkBFnGAmE6E+4bH5cYCRvUp/26hOFe1Yppd08yqC37OsEbU8z/PFHTbKK+CSh8fkmG5jThBTg7pUb76MgSt1XG9XdXA/p1l8=
   matrix:
-    - IMAGE="kalemena/zeroconf" VERSION="1.0" REPO="kalemena/docker-zeroconf"
-
+  - IMAGE="kalemena/zeroconf" VERSION="1.0" REPO="kalemena/docker-zeroconf"
 before_script:
-  - docker pull centos:7
-  - docker pull ${IMAGE}:${VERSION} || true
-
+- docker pull centos:7
+- docker pull ${IMAGE}:${VERSION} || true
 script:
-  - |
-    docker build --pull --cache-from ${IMAGE}:${VERSION} \
-      -t ${IMAGE}:${VERSION} \
-      -f Dockerfile \
-      --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-      --build-arg VCS_REF=`git rev-parse --short HEAD` \
-      --build-arg VERSION=`cat VERSION` .
-  - docker ps -a
-  - docker tag ${IMAGE}:${VERSION} ${IMAGE}:latest
-  - docker images
-
+- |
+  docker build --pull --cache-from ${IMAGE}:${VERSION} \
+    -t ${IMAGE}:${VERSION} \
+    -f Dockerfile \
+    --build-arg BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
+    --build-arg VCS_REF=`git rev-parse --short HEAD` \
+    --build-arg VERSION=`cat VERSION` .
+- docker ps -a
+- docker tag ${IMAGE}:${VERSION} ${IMAGE}:latest
+- docker images
 before_deploy:
-  - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
-
+- docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
 deploy:
   provider: script
   script: docker push ${IMAGE}:${VERSION}; docker push ${IMAGE}:latest
