@@ -16,9 +16,12 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
-RUN yum install -y epel-release; \
-    yum install -y python-pip python-devel gcc; \
-    pip install zeroconf;
+RUN yum update -y && \
+    yum install -y epel-release && \
+    yum update -y && \
+    yum install -y python3-pip python3-devel gcc && \
+    pip3 install zeroconf && \
+    yum clean all && rm -rf /var/cache/yum/*
     
 ADD [ "examples", "/examples" ]    
 

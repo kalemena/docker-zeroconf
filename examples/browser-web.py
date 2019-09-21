@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from http.server import BaseHTTPRequestHandler,HTTPServer
 
 import logging
 import socket
 import sys
 from time import sleep
-import SocketServer
+
+import socketserver
 from zeroconf import *
 # from zeroconf import ServiceBrowser, ServiceStateChange, Zeroconf
 import socket

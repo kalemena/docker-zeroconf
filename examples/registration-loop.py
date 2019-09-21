@@ -37,8 +37,8 @@ if __name__ == '__main__':
     
     try:
         while True:
-	    print("Registering " + hostname + "...")
-	    zeroconf.register_service(info)
+            print("Registering " + hostname + "...")
+            zeroconf.register_service(info)
             sleep(20)
             print("Unregistering " + hostname + "...")
             zeroconf.unregister_service(info)
