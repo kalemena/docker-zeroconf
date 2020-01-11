@@ -1,6 +1,4 @@
-FROM centos:7
-
-MAINTAINER Kalemena
+FROM python:3
 
 # Build-time metadata as defined at http://label-schema.org
 ARG BUILD_DATE
@@ -16,17 +14,10 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"
 
-RUN yum update -y && \
-    yum install -y epel-release && \
-    yum update -y && \
-    yum install -y python3-pip python3-devel gcc && \
-    pip3 install zeroconf && \
-    yum clean all && rm -rf /var/cache/yum/*
-    
 ADD [ "examples", "/examples" ]    
+
+RUN pip install zeroconf
 
 WORKDIR /examples
 
 CMD ["bash"]
-  
-
