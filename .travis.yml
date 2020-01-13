@@ -8,7 +8,7 @@ env:
   matrix:
   - IMAGE="kalemena/zeroconf" VERSION="0.24.4" REPO="kalemena/docker-zeroconf"
 before_script:
-- docker pull centos:7
+- docker pull python:3
 - docker pull ${IMAGE}:${VERSION} || true
 script:
 - |
