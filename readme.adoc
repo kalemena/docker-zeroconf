@@ -5,8 +5,9 @@ ifdef::env-github[:outfilesuffix: .adoc]
 
 ifdef::env-github[]
 image:https://img.shields.io/travis/kalemena/docker-zeroconf/master.svg[Travis build status, link=https://travis-ci.org/kalemena/docker-zeroconf]
-image:https://images.microbadger.com/badges/version/kalemena/zeroconf.svg[Docker Version, link=https://microbadger.com/images/kalemena/zeroconf]
-image:https://images.microbadger.com/badges/image/kalemena/zeroconf.svg[Docker Hub, link=https://hub.docker.com/r/kalemena/zeroconf/tags]
+image:https://img.shields.io/docker/v/kalemena/zeroconf[Docker Hub, link=https://hub.docker.com/r/kalemena/zeroconf/tags]
+image:https://img.shields.io/docker/pulls/kalemena/zeroconf[Docker Hub, link=https://hub.docker.com/r/kalemena/zeroconf/tags]
+image:https://img.shields.io/docker/image-size/kalemena/zeroconf[Docker Hub, link=https://hub.docker.com/r/kalemena/zeroconf/tags]
 endif::[]
 
 This images demonstrate minimal ZeroConf using python-zeroconf library.
