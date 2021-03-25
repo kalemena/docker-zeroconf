@@ -1,0 +1,23 @@
+name: Pipeline
+
+# on: [push]
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Docker Image
+      env:
+        IMAGE: "kalemena/zeroconf"
+        VERSION: "0.29.0"
+      run: |
+        sh .github/workflows/build.sh
+        # PUSH
+        docker login -u "${GITHUB_ACTOR}" -p "${{ secrets.DOCKER_PASSWORD }}"
+        docker push ${IMAGE}:${VERSION}
+        docker push ${IMAGE}:latest
+        docker logout
