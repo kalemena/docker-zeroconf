@@ -20,22 +20,30 @@ This repository matches the link:https://hub.docker.com/r/kalemena/zeroconf[kale
 
 This sample registers and unregisters containers every 20s. See below for running proof demo.
 
-= How-To
+== How-To
 
-== Build
+.Build
+[source,bash]
+----
+$ docker-compose build
+----
 
-    $ docker-compose build
+.Run
+[source,bash]
+----
+$ docker-compose up
+----
 
-== Run
+.Scale
+[source,bash]
+----
+$ docker-compose scale registrator=10
+----
 
-    $ docker-compose up
+== Sample output
 
-== Scale
-
-    $ docker-compose scale registrator=10
-
-= Sample output
-
+[source,bash]
+----
     $ docker-compose logs -f
     Attaching to dockerzeroconf_browser_1, dockerzeroconf_registrator_1
     browser_1      | 
@@ -68,9 +76,9 @@ This sample registers and unregisters containers every 20s. See below for runnin
     browser_1      | 
     registrator_1  | Unregistering ead0029abd57...
     browser_1      | Service ead0029abd57 Test Web Site._http._tcp.local. of type _http._tcp.local. state changed: ServiceStateChange.Removed
+----
 
-
-= References
+== References
 
 * link:https://pypi.python.org/pypi/zeroconf[ZeroConf Spec]
 * link:http://stackoverflow.com/questions/1916017/simplest-way-to-publish-over-zeroconf-bonjour[Bonjour Spec]
